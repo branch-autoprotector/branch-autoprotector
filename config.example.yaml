@@ -1,0 +1,16 @@
+# This service authenticates with the GitHub API using GitHub Apps exclusively
+github_api:
+  # The base URL of the GitHub API server with a trailing slash (optional, default:
+  # https://api.github.com/)
+  #base_url: https://github.example.com/api/v3/
+  # The slug of the organization this service watches, as included in URLs (for an organization with
+  # the URL https://github.com/example-organization, this would be “example-organization”)
+  organization: example-organization
+  # Path to the private key that was generated for the GitHub App. Make sure to set the permissions
+  # in such a way that other users on this machine can’t read it. An absolute path is recommended
+  private_key_path: /etc/branch-autoprotector/key.pem
+  # The numeric App ID of this GitHub App as shown at the top of its “About” page
+  app_id: 1234
+  # To verify that incoming webhook payloads actually come from GitHub.com, provide the GitHub App’s
+  # webhook secret (optional, but recommended for production use)
+  webhook_secret: 1234567890123456789012345678901234567890

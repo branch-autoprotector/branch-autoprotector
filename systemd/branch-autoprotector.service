@@ -1,0 +1,15 @@
+[Unit]
+Description=Automatically protect the default branch of new repositories in a GitHub organization
+After=multi-user.target network-online.target
+Wants=multi-user.target network-online.target
+
+[Service]
+Type=simple
+User=github
+Group=github
+ExecStart=/usr/bin/branch-autoprotector
+WorkingDirectory=/etc/branch-autoprotector
+Environment=RUST_LOG=branch_autoprotector=info
+
+[Install]
+WantedBy=multi-user.target network-online.target

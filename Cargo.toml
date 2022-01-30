@@ -1,0 +1,46 @@
+[package]
+name = "branch-autoprotector"
+version = "0.1.0"
+authors = ["Patrick Lühne <patrick@luehne.de>"]
+description = "Automatically protect default branches"
+documentation = "https://github.com/branch-autoprotector/branch-autoprotector"
+homepage = "https://github.com/branch-autoprotector/branch-autoprotector"
+repository = "https://github.com/branch-autoprotector/branch-autoprotector"
+readme = "README.md"
+keywords = ["ldap", "github", "admin"]
+license = "MIT"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0"
+chrono = {version = "0.4", features = ["serde"]}
+hex = "0.4"
+hmac = "0.12"
+jsonwebtoken = "7"
+log = "0.4"
+pretty_env_logger = "0.4"
+reqwest = {version = "0.11", features = ["json"]}
+reqwest-middleware = "0.1"
+reqwest-retry = "0.1"
+secstr = "0.4"
+serde = {version = "1.0", features = ["derive"]}
+serde_json = "1.0"
+serde_yaml = "0.8"
+sha2 = "0.10"
+thiserror = "1.0"
+tokio = {version = "1", features = ["macros", "rt-multi-thread"]}
+url = {version = "2.2", features = ["serde"]}
+warp = "0.3"
+
+[package.metadata.deb]
+depends = "$auto, git, systemd"
+extended-description = """\
+Automatically protect the default branch of new repositories in a GitHub \
+organization."""
+section = "admin"
+priority = "optional"
+assets = [
+	["target/release/branch-autoprotector", "usr/bin/", "755"],
+	["config.example.yaml", "etc/branch-autoprotector/", "600"],
+	["systemd/branch-autoprotector.service", "usr/lib/systemd/system/", "644"],
+]
